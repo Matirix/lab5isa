@@ -28,7 +28,7 @@ http.createServer((req, res) => {
 
 
     if (hasNoGoKeywords) {
-        res.writeHead(400, defaultHeader);
+        res.writeHead(401, defaultHeader);
         res.end(JSON.stringify({ message: 'Disallowed SQL query detected' }));
     }
     else if (req.method == 'GET' && pathname === '/execute') {
@@ -39,7 +39,7 @@ http.createServer((req, res) => {
                 res.end(JSON.stringify({ message: err }));
             };
             console.log(result);
-            res.end(JSON.stringify({message: result}));
+            res.end(JSON.stringify(result));
         });
     } else if (req.method == 'POST' && pathname == '/execute') {
         res.writeHead(200, defaultHeader);
