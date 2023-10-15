@@ -16,6 +16,12 @@ http.createServer((req, res) => {
     });
 
     let sqlQuery = query.query ? query.query : `SELECT * FROM patient_info;`
+    // DROP TABLE patient_info;
+    // CREATE TABLE patient_info (
+    //     patientid INT AUTO_INCREMENT PRIMARY KEY,
+    //     patientName VARCHAR(100),
+    //     patientDOB DATE
+    // );
     const noGoKeywords = ['DROP', 'UPDATE', 'PUT', 'DELETE'];
     const hasNoGoKeywords = noGoKeywords.some(keyword => sqlQuery.toUpperCase().includes(keyword));
 
@@ -33,7 +39,7 @@ http.createServer((req, res) => {
                 res.end(JSON.stringify({ message: err }));
             };
             console.log(result);
-            res.end(JSON.stringify(result));
+            res.end(JSON.stringify({message: result}));
         });
     } else if (req.method == 'POST' && pathname == '/execute') {
         res.writeHead(200, defaultHeader);
