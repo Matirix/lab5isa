@@ -61,6 +61,9 @@ http.createServer((req, res) => {
             console.log(result);
             res.end(JSON.stringify({message: "Insert Successful! Run a Select Qeury to see the results"}));
         })
+    } else {
+        res.writeHead(404, defaultHeader);
+        res.end(JSON.stringify({ message: 'Command not valid!' }));
     }
 
     
