@@ -29,7 +29,7 @@ http.createServer((req, res) => {
 
     if (hasNoGoKeywords) {
         res.writeHead(401, defaultHeader);
-        res.end(JSON.stringify({ message: 'Disallowed SQL query detected' }));
+        res.end(JSON.stringify({ sqlMessage: 'Disallowed SQL query detected' }));
     }
     else if (req.method == 'GET' && pathname === '/execute') {
         console.log(sqlQuery)
@@ -37,7 +37,7 @@ http.createServer((req, res) => {
         connection.query(sqlQuery, (err, result) => {
             if (err) {
                 res.writeHead(401, defaultHeader);
-                res.end(JSON.stringify({ message: err }));            
+                res.end(JSON.stringify(err));
             };
             console.log(result);
             res.writeHead(200, defaultHeader);
@@ -48,7 +48,7 @@ http.createServer((req, res) => {
         connection.query(sqlQuery, (err, result) => {
             if (err) {
                 res.writeHead(401, defaultHeader);
-                res.end(JSON.stringify({ message: err }));
+                res.end(JSON.stringify(err));
             };
             console.log(result);
             res.writeHead(200, defaultHeader);
@@ -60,7 +60,7 @@ http.createServer((req, res) => {
         connection.query(sqlQuery, (err, result) => {
             if (err) {
                 res.writeHead(401, defaultHeader);
-                res.end(JSON.stringify({ message: err }));
+                res.end(JSON.stringify(err));
             };
             console.log(result);
             res.writeHead(200, defaultHeader);
