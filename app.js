@@ -36,29 +36,34 @@ http.createServer((req, res) => {
         res.writeHead(200, defaultHeader);
         connection.query(sqlQuery, (err, result) => {
             if (err) {
-                res.end(JSON.stringify({ message: err }));
+                res.writeHead(401, defaultHeader);
+                res.end(JSON.stringify({ message: err }));            
             };
             console.log(result);
+            res.writeHead(200, defaultHeader);
             res.end(JSON.stringify(result));
         });
     } else if (req.method == 'POST' && pathname == '/execute') {
-        res.writeHead(200, defaultHeader);
+
         connection.query(sqlQuery, (err, result) => {
             if (err) {
+                res.writeHead(401, defaultHeader);
                 res.end(JSON.stringify({ message: err }));
             };
             console.log(result);
+            res.writeHead(200, defaultHeader);
             res.end(JSON.stringify({message: "Query Posted Successfully"}));
         });
     ///For the button
     } else if (req.method == 'POST' && pathname == '/insertAll') {
-        res.writeHead(200, defaultHeader);
         let sqlQuery = `INSERT INTO patient_info (patientName, patientDOB) VALUES ('Sara Brown', '1990-01-01'), ('John Smith', '1941-01-01'), ('Jack Ma', '1961-01-30'), ('Elon Musk', '1999-01-01');`
         connection.query(sqlQuery, (err, result) => {
             if (err) {
+                res.writeHead(401, defaultHeader);
                 res.end(JSON.stringify({ message: err }));
             };
             console.log(result);
+            res.writeHead(200, defaultHeader);
             res.end(JSON.stringify({message: "Insert Successful! Run a Select Qeury to see the results"}));
         })
     } else {
