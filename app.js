@@ -38,6 +38,7 @@ http.createServer((req, res) => {
         connection.query(sqlQuery, (err, result) => {
             if (err) throw err;
             console.log(result);
+            res.end(JSON.stringify({message: "Query Posted Successfully"}));
         });
     ///For the button
     } else if (req.method == 'POST' && pathname == '/insertAll') {
@@ -47,7 +48,7 @@ http.createServer((req, res) => {
         connection.query(sqlQuery, (err, result) => {
             if (err) throw err;
             console.log(result);
-            res.end(JSON.stringify("Rows Inserted Successfully."));
+            res.end(JSON.stringify({message: "Insert Successful! Run a Select Qeury to see the results"}));
         })
     }
 
